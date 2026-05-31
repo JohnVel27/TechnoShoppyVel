@@ -14,37 +14,28 @@ export function ProductProvider({children}){
 
       try {
 
-        const res = await fetch("/api/products");
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
-
-        setProducts(data);
-
+        // Directly import the data from db.json
+        const { products } = await import("../data/db.json");
+        setProducts(products);
       } catch (err) {
-
         setError(err.message);
-
       } finally {
-
         setLoading(false);
-
       }
     };
-
     fetchProducts();
-
   }, []);
 
-
-  return(
-    <ProductContext.Provider value={{products,loading,error}}>
+  return (
+    <ProductContext.Provider value={{ products, loading, error }}>
         { children }
     </ProductContext.Provider>
   )
+}
+
+export function useProducts() {
+    return useContext(ProductContext)
+}
 }
 
 export function useProducts() {
