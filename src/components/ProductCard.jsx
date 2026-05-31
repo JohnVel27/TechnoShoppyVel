@@ -12,7 +12,7 @@ const ProductCard = ({product}) => {
 
             {/* IMAGE */}
             <img
-              src={`http://localhost:8000/${product.image}`}
+              src={product.image}
               alt={product.name}
               className="h-40 w-full object-cover rounded mb-4"
             />
